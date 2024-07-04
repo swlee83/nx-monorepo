@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: install
+        run: pnpm install
+
+      - name: build
+        run: pnpm build:owwislee
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -21,4 +27,4 @@ jobs:
           aws-region: us-east-2
 
       - name: Sync specific path to S3
-        run: aws s3 sync ../../dist/apps/oowislee s3://oowislee.com --delete
+        run: aws s3 sync dist/apps/oowislee s3://oowislee.com --delete
