@@ -1,0 +1,9 @@
+import styled from 'styled-components';
+
+export const MainStyled = styled.div`
+  li {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
