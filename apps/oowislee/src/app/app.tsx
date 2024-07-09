@@ -1,17 +1,24 @@
-import styled from 'styled-components';
+import { Suspense, lazy } from 'react';
+import { Routes, Route, useNavigate, NavigateFunction } from 'react-router-dom';
+import ImageLazyLoading from '../pages/ImageLazyLoading';
 
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+const Main = lazy(() => import('../pages/Main'));
 
 export function App() {
+  const navigate = useNavigate();
+  appRouter.navigate = navigate;
+
   return (
-    <StyledApp>
-      <NxWelcome title="oowislee" />
-    </StyledApp>
+    <Suspense fallback={<div>suspense</div>}>
+      <Routes>
+        <Route path="" element={<Main />} />
+        <Route path="/image-lazy-loading" element={<ImageLazyLoading />} />
+      </Routes>
+    </Suspense>
   );
 }
 
 export default App;
+export const appRouter = { navigate: null } as {
+  navigate: null | NavigateFunction;
+};
